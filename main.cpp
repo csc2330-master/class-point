@@ -26,6 +26,10 @@ public:
     void Read(istream&);
     void Write(ostream&)const;
     string ToString()const;
+    // The parameter by reference to save time and space (memory)
+    // also constant to avoid changing the param inside the method
+    // the method itself is const because it cannot change this
+    double Distance(const Point&)const;
 };
 
 Point::Point(){
@@ -58,10 +62,17 @@ string Point::ToString()const{
     ss << "[" << _x << ", " << _y << "]";
     return ss.str();
 }
-
+double Point::Distance(const Point& p) const {
+    return sqrt(pow(p._x - _x, 2.0) + pow(p._y - _y, 2.0));
+}
 
 
 int main() {
-    cout << "Hello, World!" << endl;
+    Point a;
+    Point b(1,1);
+    cout << a.ToString() << endl;
+    cout << b.ToString() << endl;
+
+    cout << a.Distance(b) << endl;
     return 0;
 }
